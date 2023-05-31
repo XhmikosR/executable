@@ -1,19 +1,19 @@
-# executable [![Build Status](https://travis-ci.org/kevva/executable.svg?branch=master)](https://travis-ci.org/kevva/executable)
+# executable [![CI](https://github.com/kevva/executable/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/kevva/executable/actions/workflows/ci.yml)
 
 > Check if a file is executable
 
 
 ## Install
 
-```
-$ npm install --save executable
+```sh
+npm install executable
 ```
 
 
 ## Usage
 
 ```js
-const executable = require('executable');
+import executable from 'executable';
 
 executable('bash').then(exec => {
 	console.log(exec);

@@ -1,6 +1,7 @@
-'use strict';
-const fs = require('fs');
-const pify = require('pify');
+/* eslint-disable no-bitwise */
+
+import fs, {promises as fsPromises} from 'node:fs';
+import process from 'node:process';
 
 const isExe = (mode, gid, uid) => {
 	if (process.platform === 'win32') {
@@ -10,20 +11,20 @@ const isExe = (mode, gid, uid) => {
 	const isGroup = gid ? process.getgid && gid === process.getgid() : true;
 	const isUser = uid ? process.getuid && uid === process.getuid() : true;
 
-	return Boolean((mode & 0o0001) ||
-		((mode & 0o0010) && isGroup) ||
-		((mode & 0o0100) && isUser));
+	return Boolean((mode & 0o0001)
+		|| ((mode & 0o0010) && isGroup)
+		|| ((mode & 0o0100) && isUser));
 };
 
-module.exports = name => {
+const executable = name => {
 	if (typeof name !== 'string') {
 		return Promise.reject(new TypeError('Expected a string'));
 	}
 
-	return pify(fs.stat)(name).then(stats => stats && stats.isFile() && isExe(stats.mode, stats.gid, stats.uid));
+	return fsPromises.stat(name).then(stats => stats && stats.isFile() && isExe(stats.mode, stats.gid, stats.uid));
 };
 
-module.exports.sync = name => {
+executable.sync = name => {
 	if (typeof name !== 'string') {
 		throw new TypeError('Expected a string');
 	}
@@ -33,4 +34,6 @@ module.exports.sync = name => {
 	return stats && stats.isFile() && isExe(stats.mode, stats.gid, stats.uid);
 };
 
-module.exports.checkMode = isExe;
+executable.checkMode = isExe;
+
+export default executable;

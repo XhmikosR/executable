@@ -1,15 +1,21 @@
-import path from 'path';
+import path from 'node:path';
+import process from 'node:process';
+import {fileURLToPath} from 'node:url';
 import test from 'ava';
-import m from './';
+import executable from './index.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 test('test executable and return true', async t => {
-	t.true(await m(path.join(__dirname, 'fixtures/optipng')));
+	t.true(await executable(path.join(__dirname, 'fixtures/optipng')));
 });
 
 test('test executable synchronously and return true', t => {
-	t.true(m.sync(path.join(__dirname, 'fixtures/optipng')));
+	t.true(executable.sync(path.join(__dirname, 'fixtures/optipng')));
 });
 
 test('test non-executable', async t => {
-	t.false(await m(path.join(__dirname, 'readme.md')));
+	const isWindows = process.platform === 'win32';
+	// eslint-disable-next-line ava/use-t-well
+	t[isWindows](await executable(path.join(__dirname, 'readme.md')));
 });
