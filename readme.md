@@ -1,4 +1,4 @@
-# executable [![CI](https://github.com/kevva/executable/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/kevva/executable/actions/workflows/ci.yml)
+# executable [![CI](https://github.com/XhmikosR/executable/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/XhmikosR/executable/actions/workflows/ci.yml)
 
 > Check if a file is executable
 
@@ -6,14 +6,14 @@
 ## Install
 
 ```sh
-npm install executable
+npm install @xhmikosr/executable
 ```
 
 
 ## Usage
 
 ```js
-import executable from 'executable';
+import executable from '@xhmikosr/executable';
 
 executable('bash').then(exec => {
 	console.log(exec);

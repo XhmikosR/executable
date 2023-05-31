@@ -1,9 +1,12 @@
 {
-  "name": "executable",
+  "name": "@xhmikosr/executable",
   "version": "4.1.1",
   "description": "Check if a file is executable",
   "license": "MIT",
-  "repository": "kevva/executable",
+  "repository": "XhmikosR/executable",
+  "publishConfig": {
+    "access": "public"
+  },
   "author": {
     "name": "Kevin Mårtensson",
     "email": "kevinmartensson@gmail.com",
