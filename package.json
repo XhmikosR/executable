@@ -1,6 +1,6 @@
 {
   "name": "@xhmikosr/executable",
-  "version": "4.1.1",
+  "version": "5.0.0",
   "description": "Check if a file is executable",
   "license": "MIT",
   "repository": "XhmikosR/executable",
