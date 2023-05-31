@@ -1,6 +1,6 @@
 /* eslint-disable no-bitwise */
 
-import fs, {promises as fsPromises} from 'node:fs';
+import fs, {promises as fsP} from 'node:fs';
 import process from 'node:process';
 
 const isExe = (mode, gid, uid) => {
@@ -21,7 +21,7 @@ const executable = name => {
 		return Promise.reject(new TypeError('Expected a string'));
 	}
 
-	return fsPromises.stat(name).then(stats => stats && stats.isFile() && isExe(stats.mode, stats.gid, stats.uid));
+	return fsP.stat(name).then(stats => stats && stats.isFile() && isExe(stats.mode, stats.gid, stats.uid));
 };
 
 executable.sync = name => {
